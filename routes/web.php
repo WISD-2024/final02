@@ -1,6 +1,9 @@
 <?php
 
+<<<<<<< HEAD
 use App\Http\Controllers\ProfileController;
+=======
+>>>>>>> 9ef89c9fcceb5f239ed53b20417af1db43d91c85
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,3 +32,4 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
