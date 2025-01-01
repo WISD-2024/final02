@@ -34,7 +34,7 @@ Route::resource('seller/products', ProductController::class);}); //賣家管理�
 use App\Http\Controllers\SellerController;
 
 Route::prefix('seller')->middleware(['auth', 'role:seller'])->group(function () {
-    // 賣家主頁（顯示賣家的商品）
+    // 賣家主頁（顯示賣家的商品列表）
     Route::get('/', [SellerController::class, 'index'])->name('seller.index');
 
     // 商品創建頁面
