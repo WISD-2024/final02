@@ -30,7 +30,7 @@ class RoleAndPermissionSeeder extends Seeder
         //$adminUser = User::find(1); 
         //$adminUser->assignRole('admin');
 
-        $sellerUser = User::find(2); 
+        $sellerUser = User::find(1); 
         $sellerUser->assignRole('seller');
         
         //$visitorUser = User::find(3); 

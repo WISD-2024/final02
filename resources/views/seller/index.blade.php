@@ -1,9 +1,9 @@
 <!-- resources/views/seller/index.blade.php -->
-@extends('layouts.app') <!-- 假設有一個共享的佈局文件 -->
+@extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <h1>My Products</h1>
+    <div class="container text-gray-900 dark:text-white">
+        <h1 class="text-gray-900 dark:text-white">Create New Product</h1>
 
         <!-- 顯示操作成功的訊息 -->
         @if(session('success'))

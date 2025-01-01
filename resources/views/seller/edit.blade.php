@@ -2,8 +2,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <h1>Edit Product</h1>
+    <div class="container text-gray-900 dark:text-white">
+        <h1 class="text-gray-900 dark:text-white">Create New Product</h1>
 
         <!-- 顯示表單驗證錯誤訊息 -->
         @if($errors->any())

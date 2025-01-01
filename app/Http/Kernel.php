@@ -43,6 +43,15 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\ThrottleRequests::class.':api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
+        'role' => [
+            \Spatie\Permission\Middlewares\RoleMiddleware::class
+        ], // 這一行應該移除
+        'permission' => [
+            \Spatie\Permission\Middlewares\PermissionMiddleware::class
+        ],
+        'role_or_permission' => [
+            \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class
+        ],
     ];
 
     /**

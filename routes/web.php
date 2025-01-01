@@ -37,17 +37,17 @@ Route::middleware(['role:seller'])->group(function () {
 //賣家頁面路由
 use App\Http\Controllers\SellerController;
 
-Route::prefix('seller')->middleware(['auth', 'role:seller'])->group(function () {
-    // 賣家主頁（顯示賣家的商品列表）
+Route::middleware(['auth', 'role:seller'])->prefix('seller')->group(function () {
+    // 顯示賣家主頁（商品列表頁面）
     Route::get('/', [SellerController::class, 'index'])->name('seller.index');
 
-    // 商品創建頁面
+    // 顯示創建商品表單
     Route::get('create', [SellerController::class, 'create'])->name('seller.create');
 
     // 儲存商品
     Route::post('store', [SellerController::class, 'store'])->name('seller.store');
 
-    // 編輯商品頁面
+    // 顯示編輯商品表單
     Route::get('edit/{product}', [SellerController::class, 'edit'])->name('seller.edit');
 
     // 更新商品
@@ -55,4 +55,20 @@ Route::prefix('seller')->middleware(['auth', 'role:seller'])->group(function () 
 
     // 刪除商品
     Route::delete('destroy/{product}', [SellerController::class, 'destroy'])->name('seller.destroy');
+});
+
+Route::get('/seller/create', function () {
+    return view('seller.create');
+});
+Route::get('/seller/edit', function () {
+    return view('seller.edit');
+});
+Route::get('/seller/index', function () {
+    return view('seller.index');
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/seller/create', [App\Http\Controllers\SellerController::class, 'create'])->name('seller.create');
+    Route::post('/seller', [App\Http\Controllers\SellerController::class, 'store'])->name('seller.store');
+    Route::get('/seller', [App\Http\Controllers\SellerController::class, 'index'])->name('seller.index');
 });
