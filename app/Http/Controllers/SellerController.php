@@ -16,7 +16,7 @@ class SellerController extends Controller
     // 顯示賣家所有商品
     public function index()
     {
-        $products = Product::where('user_id', Auth::id())->get();
+        $products = Product::all();
         return view('seller.index', compact('products'));
     }
 
@@ -29,13 +29,13 @@ class SellerController extends Controller
     // 儲存創建的商品
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'price' => 'required|numeric',
-            'description' => 'nullable|string',
+            'price' => 'required|numeric|min:0',
+            'description' => 'nullable|string'
         ]);
 
-        Product::create([
+        Product::create($validated)([
             'name' => $request->name,
             'price' => $request->price,
             'description' => $request->description,

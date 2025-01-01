@@ -71,4 +71,4 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/seller/create', [App\Http\Controllers\SellerController::class, 'create'])->name('seller.create');
     Route::post('/seller', [App\Http\Controllers\SellerController::class, 'store'])->name('seller.store');
     Route::get('/seller', [App\Http\Controllers\SellerController::class, 'index'])->name('seller.index');
-});
+}); 
