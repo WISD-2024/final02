@@ -12,9 +12,9 @@ class RoleAndPermissionSeeder extends Seeder
     public function run()
     {
         // 角色                     firstOrCreate->避免重複創建
-        $admin = Role::firstOrCreate(['name' => 'admin']);
+        //$admin = Role::firstOrCreate(['name' => 'admin']);
         $seller = Role::firstOrCreate(['name' => 'seller']);
-        $visitor = Role::firstOrCreate(['name' => 'visitor']);
+        //$visitor = Role::firstOrCreate(['name' => 'visitor']);
         
         // 權限
         $viewProducts = Permission::firstOrCreate(['name' => 'view products']);
@@ -22,18 +22,18 @@ class RoleAndPermissionSeeder extends Seeder
         $deleteProducts = Permission::firstOrCreate(['name' => 'delete products']);
         
         // 分配權限
-        $admin->givePermissionTo($viewProducts, $editProducts, $deleteProducts);
+        //$admin->givePermissionTo($viewProducts, $editProducts, $deleteProducts);
         $seller->givePermissionTo($viewProducts, $editProducts);
-        $visitor->givePermissionTo($viewProducts);
+        //$visitor->givePermissionTo($viewProducts);
 
         // 分配角色
-        $adminUser = User::find(1); 
-        $adminUser->assignRole('admin');
+        //$adminUser = User::find(1); 
+        //$adminUser->assignRole('admin');
 
         $sellerUser = User::find(2); 
         $sellerUser->assignRole('seller');
         
-        $visitorUser = User::find(3); 
-        $visitorUser->assignRole('visitor');
+        //$visitorUser = User::find(3); 
+        //$visitorUser->assignRole('visitor');
     }
 }

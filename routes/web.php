@@ -30,3 +30,25 @@ Route::resource('seller/products', ProductController::class);}); //賣家管理�
 //Route::resource('admin/users', UserController::class);
 //Route::resource('admin/orders', OrderController::class);
 //});
+
+use App\Http\Controllers\SellerController;
+
+Route::prefix('seller')->middleware(['auth', 'role:seller'])->group(function () {
+    // 賣家主頁（顯示賣家的商品）
+    Route::get('/', [SellerController::class, 'index'])->name('seller.index');
+
+    // 商品創建頁面
+    Route::get('create', [SellerController::class, 'create'])->name('seller.create');
+
+    // 儲存商品
+    Route::post('store', [SellerController::class, 'store'])->name('seller.store');
+
+    // 編輯商品頁面
+    Route::get('edit/{product}', [SellerController::class, 'edit'])->name('seller.edit');
+
+    // 更新商品
+    Route::put('update/{product}', [SellerController::class, 'update'])->name('seller.update');
+
+    // 刪除商品
+    Route::delete('destroy/{product}', [SellerController::class, 'destroy'])->name('seller.destroy');
+});
