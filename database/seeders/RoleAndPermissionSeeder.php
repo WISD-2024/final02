@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use App\Models\User;
 
 class RoleAndPermissionSeeder extends Seeder
 {
@@ -24,5 +25,15 @@ class RoleAndPermissionSeeder extends Seeder
         $admin->givePermissionTo($viewProducts, $editProducts, $deleteProducts);
         $seller->givePermissionTo($viewProducts, $editProducts);
         $visitor->givePermissionTo($viewProducts);
+
+        // 分配角色
+        $adminUser = User::find(1); 
+        $adminUser->assignRole('admin');
+
+        $sellerUser = User::find(2); 
+        $sellerUser->assignRole('seller');
+        
+        $visitorUser = User::find(3); 
+        $visitorUser->assignRole('visitor');
     }
 }
