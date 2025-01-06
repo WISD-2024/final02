@@ -42,11 +42,11 @@ class SellerController extends Controller
     }
 
     // 顯示商品編輯表單
-    public function edit($id)
+    public function edit(Product $product)
     {
-        $product = Product::findOrFail($id);
         return view('seller.edit', compact('product'));
     }
+
     // 更新商品
     public function update(Request $request, Product $product)
     {
@@ -56,22 +56,17 @@ class SellerController extends Controller
             'description' => 'nullable|string',
         ]);
 
-        // 檢查商品是否屬於當前賣家
-        if ($product->user_id !== Auth::id()) {
-            return redirect()->route('seller.index')->with('error', 'You do not have permission to update this product.');
-        }
-
         $product->update($request->all());
 
-        return redirect()->route('seller.index')->with('success', 'Product updated successfully!');
+        return redirect()->route('seller.index')->with('success', '商品已更新!');
     }
 
     // 刪除商品
-    public function destroy($id)
+    public function destroy(Product $product)
     {
-        $product = Product::findOrFail($id);
+
         $product->delete();
-    
-        return redirect()->route('seller.index')->with('success', '商品已刪除');
+
+        return redirect()->route('seller.index')->with('success', '商品已刪除!');
     }
 }

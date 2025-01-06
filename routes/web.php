@@ -20,7 +20,7 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('welcome');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -32,15 +32,13 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 //賣家功能
-Route::middleware(['role:seller'])->group(function () {
+
     Route::get('seller/dashboard', [SellerController::class, 'dashboard']);
     Route::resource('seller/products', ProductController::class);
-});
 
 
-Route::middleware(['auth', 'role:seller'])->prefix('seller')->group(function () {
-    // 顯示賣家主頁（商品列表頁面）
-    Route::get('/', [SellerController::class, 'index'])->name('seller.index');
+
+    Route::get('/seller/create', [SellerController::class, 'index'])->name('seller.index');
 
     // 顯示創建商品表單
     Route::get('create', [SellerController::class, 'create'])->name('seller.create');
@@ -56,7 +54,7 @@ Route::middleware(['auth', 'role:seller'])->prefix('seller')->group(function () 
 
     // 刪除商品
     Route::delete('destroy/{product}', [SellerController::class, 'destroy'])->name('seller.destroy');
-});
+
 
 Route::get('/seller/create', function () {
     return view('seller.create');
