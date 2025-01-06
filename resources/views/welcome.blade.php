@@ -200,24 +200,14 @@
 </div>
 
 <section class="products">
-    <div class="product-card">
-        <img src="https://via.placeholder.com/300x200" alt="Product 1">
-        <h3>Handmade Pottery</h3>
-        <p>$25.00</p>
-        <a href="#" class="btn">Buy Now</a>
-    </div>
-    <div class="product-card">
-        <img src="https://via.placeholder.com/300x200" alt="Product 2">
-        <h3>Knitted Scarf</h3>
-        <p>$15.00</p>
-        <a href="#" class="btn">Buy Now</a>
-    </div>
-    <div class="product-card">
-        <img src="https://via.placeholder.com/300x200" alt="Product 3">
-        <h3>Wooden Sculpture</h3>
-        <p>$50.00</p>
-        <a href="#" class="btn">Buy Now</a>
-    </div>
+    @foreach($products as $product) <!-- 遍歷所有產品 -->
+        <div class="product-card">
+            <img src="https://via.placeholder.com/300x200" alt="{{ $product->name }}">
+            <h3>{{ $product->name }}</h3>
+            <p>${{ number_format($product->price, 2) }}</p>
+            <a href="#" class="btn">Buy Now</a>
+        </div>
+    @endforeach
 </section>
 
 <footer>
