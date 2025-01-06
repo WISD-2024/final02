@@ -1,28 +1,31 @@
 <?php
 
-namespace App\Http\Middleware;
+namespace App\Http\Controllers;
 
-use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class AdminMiddleware
+class AdminController extends Controller
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @return mixed
-     */
-    public function handle(Request $request, Closure $next)
+    // 建構函數，保護後台頁面
+    public function __construct()
     {
-        // 確保用戶已登入且為管理員
-        if (Auth::check() && Auth::user()->isAdmin()) {
-            return $next($request); // 繼續執行請求
-        }
-
-        // 否則重定向到首頁
-        return redirect('/home');
+        $this->middleware('auth');  // 確保用戶已經登入
+        $this->middleware('admin'); // 使用中間件檢查是否為管理員
     }
+
+    // 顯示後台主頁
+    public function index()
+    {
+        return view('admin.dashboard'); // 你可以創建一個 admin.dashboard 視圖
+    }
+
+    // 其他管理員功能
+    public function manageUsers()
+    {
+        // 邏輯來管理用戶，例如顯示所有用戶
+        return view('admin.manage_users');
+    }
+
+    // 其他功能
+    // public function otherAdminFunction() { ... }
 }
