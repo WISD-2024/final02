@@ -183,6 +183,10 @@
             <a href="{{ route('login') }}">Login</a>
             <a href="{{ route('register') }}">Register</a>
         @endauth
+
+            @if(auth()->user() && auth()->user()->isAdmin())
+                <a href="{{ route('admin.dashboard') }}" class="btn btn-primary">管理員後台</a>
+            @endif
     </nav>
 </header>
 
