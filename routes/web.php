@@ -3,7 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SellerController;
-
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\AdminController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -70,5 +71,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/seller/create', [App\Http\Controllers\SellerController::class, 'create'])->name('seller.create');
     Route::post('/seller', [App\Http\Controllers\SellerController::class, 'store'])->name('seller.store');
     Route::get('/seller', [App\Http\Controllers\SellerController::class, 'index'])->name('seller.index');
-}); 
+});
 
+Route::post('/login', [LoginController::class, 'login'])->name('login');
+
+Route::middleware(['auth', 'is_admin'])->group(function () {
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
+});
+
+Route::get('/admin/dashboard', function () {
+    return view('admin.dashboard');
+});

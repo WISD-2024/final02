@@ -25,11 +25,18 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        $request->authenticate();
+        $request->authenticate(); // 驗證憑據
 
-        $request->session()->regenerate();
+        $request->session()->regenerate(); // 重新生成 Session
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        $user = Auth::user(); // 獲取當前用戶
+
+        // 根據用戶角色進行重定向
+        if ($user->isAdmin()) {
+            return redirect()->route('admin.dashboard'); // 管理員重定向到後台
+        }
+
+        return redirect()->intended('/home'); // 普通用戶重定向到首頁
     }
 
     /**

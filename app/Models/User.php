@@ -13,6 +13,11 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
+    public function isAdmin()
+    {
+        return $this->hasRole('admin'); // 使用 Spatie 提供的 hasRole 方法來檢查角色
+    }
+
     /**
      * The attributes that are mass assignable.
      *
@@ -23,6 +28,7 @@ class User extends Authenticatable
         'email',
         'password',
     ];
+
 
     /**
      * The attributes that should be hidden for serialization.
