@@ -188,6 +188,9 @@
             @if(auth()->user() && auth()->user()->isAdmin())
                 <a href="{{ route('admin.dashboard') }}" class="btn btn-primary">管理員後台</a>
             @endif
+            @auth
+                <a href="#" data-toggle="modal" data-target="#complaintModal">意見欄</a>
+            @endauth
     </nav>
 </header>
 
@@ -219,10 +222,11 @@
         <a href="#" class="btn">Buy Now</a>
     </div>
 </section>
-
 <footer>
     <p>&copy; 2024 本地手工藝品交易平台. All rights reserved.</p>
 </footer>
+
+
 </body>
 
 </html>

@@ -18,7 +18,13 @@ class AdminController extends Controller
     {
         return view('admin.dashboard'); // 你可以創建一個 admin.dashboard 視圖
     }
+// AdminController 顯示所有投訴
+    public function showComplaints()
+    {
+        $complaints = Complaint::with('user')->get(); // 取得所有投訴紀錄，並帶入用戶資料
 
+        return view('admin.complaints', compact('complaints'));
+    }
     // 其他管理員功能
     public function manageUsers()
     {

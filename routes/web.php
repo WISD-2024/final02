@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SellerController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ComplaintController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -82,3 +83,6 @@ Route::middleware(['auth', 'is_admin'])->group(function () {
 Route::get('/admin/dashboard', function () {
     return view('admin.dashboard');
 });
+Route::post('/complaints', [ComplaintController::class, 'store'])->name('complaints.store');
+Route::get('/admin/complaints', [AdminController::class, 'showComplaints'])->name('admin.complaints');
+
