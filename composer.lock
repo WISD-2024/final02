@@ -5,6 +5,10 @@
         "This file is @generated automatically"
     ],
     "content-hash": "97912d4a944148ea7e0fbdcd95292149",
+
+
+
+
     "packages": [
         {
             "name": "brick/math",
@@ -8278,5 +8282,5 @@
         "php": "^8.1"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }

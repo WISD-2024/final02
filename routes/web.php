@@ -29,6 +29,7 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
 //賣家功能
 Route::middleware(['role:seller'])->group(function () {
     Route::get('seller/dashboard', [SellerController::class, 'dashboard']);
@@ -72,3 +73,4 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/seller', [App\Http\Controllers\SellerController::class, 'store'])->name('seller.store');
     Route::get('/seller', [App\Http\Controllers\SellerController::class, 'index'])->name('seller.index');
 }); 
+
