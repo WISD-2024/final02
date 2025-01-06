@@ -3,7 +3,7 @@
 
 @section('content')
     <div class="container text-gray-900 dark:text-white">
-        <h1 class="text-gray-900 dark:text-white">Create New Product</h1>
+
 
         <!-- 顯示操作成功的訊息 -->
         @if(session('success'))
@@ -12,15 +12,15 @@
             </div>
         @endif
 
-        <a href="{{ route('seller.create') }}" class="btn btn-primary">Create New Product</a>
+        <a href="{{ route('seller.create') }}" class="btn btn-primary">新增商品</a>
 
         <table class="table mt-4">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Price</th>
-                    <th>Description</th>
-                    <th>Actions</th>
+                    <th>名稱</th>
+                    <th>價格</th>
+                    <th>說明</th>
+                    <th>動作</th>
                 </tr>
             </thead>
             <tbody>

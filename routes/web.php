@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SellerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,8 +36,7 @@ Route::middleware(['role:seller'])->group(function () {
     Route::get('seller/dashboard', [SellerController::class, 'dashboard']);
     Route::resource('seller/products', ProductController::class);
 });
-//賣家頁面路由
-use App\Http\Controllers\SellerController;
+
 
 Route::middleware(['auth', 'role:seller'])->prefix('seller')->group(function () {
     // 顯示賣家主頁（商品列表頁面）

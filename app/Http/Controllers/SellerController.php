@@ -8,11 +8,6 @@ use Illuminate\Support\Facades\Auth;
 
 class SellerController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('role:seller'); // 僅賣家可訪問
-    }
-
     // 顯示賣家所有商品
     public function index()
     {
@@ -29,33 +24,29 @@ class SellerController extends Controller
     // 儲存創建的商品
     public function store(Request $request)
     {
+        // 驗證輸入
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'price' => 'required|numeric|min:0',
-            'description' => 'nullable|string'
+            'price' => 'required|numeric',
+            'description' => 'nullable|string',
         ]);
-
-        Product::create($validated)([
-            'name' => $request->name,
-            'price' => $request->price,
-            'description' => $request->description,
-            'user_id' => Auth::id(),  // 取得當前用戶（賣家）ID
-        ]);
-
-        return redirect()->route('seller.index')->with('success', 'Product created successfully!');
+    
+        // 附加當前用戶 ID 到資料中
+        $validated['user_id'] = Auth::id();
+    
+        // 使用 create 方法創建商品
+        Product::create($validated);
+    
+        // 返回成功響應或重定向
+        return redirect()->route('seller.index')->with('success', '商品已成功新增！');
     }
 
     // 顯示商品編輯表單
-    public function edit(Product $product)
+    public function edit($id)
     {
-        // 檢查商品是否屬於當前賣家
-        if ($product->user_id !== Auth::id()) {
-            return redirect()->route('seller.index')->with('error', 'You do not have permission to edit this product.');
-        }
-
+        $product = Product::findOrFail($id);
         return view('seller.edit', compact('product'));
     }
-
     // 更新商品
     public function update(Request $request, Product $product)
     {
@@ -76,15 +67,11 @@ class SellerController extends Controller
     }
 
     // 刪除商品
-    public function destroy(Product $product)
+    public function destroy($id)
     {
-        // 檢查商品是否屬於當前賣家
-        if ($product->user_id !== Auth::id()) {
-            return redirect()->route('seller.index')->with('error', 'You do not have permission to delete this product.');
-        }
-
+        $product = Product::findOrFail($id);
         $product->delete();
-
-        return redirect()->route('seller.index')->with('success', 'Product deleted successfully!');
+    
+        return redirect()->route('seller.index')->with('success', '商品已刪除');
     }
 }
