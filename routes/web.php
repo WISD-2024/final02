@@ -89,11 +89,12 @@ Route::middleware(['auth', 'is_admin'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
 });
 
-Route::get('/admin/dashboard', function () {
-    return view('admin.dashboard');
+
+Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
+    Route::get('/', [ComplaintController::class, 'dashboard'])->name('admin.dashboard');
+    Route::post('/complaints', [ComplaintController::class, 'store'])->name('complaints.store');
 });
-Route::post('/complaints', [ComplaintController::class, 'store'])->name('complaints.store');
-Route::get('/admin', [AdminController::class, 'dashboard'])->middleware('auth', 'admin');
+
 
 
 
