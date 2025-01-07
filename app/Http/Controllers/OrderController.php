@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use App\Models\CartItem;
 use App\Models\Order;
 use App\Models\OrderDetail;
+use App\Models\Product;
 
 class OrderController extends Controller
 {
@@ -70,5 +71,34 @@ class OrderController extends Controller
 
         // 返回訂單列表的視圖
         return view('orders.index', compact('orders'));
+    }
+
+    /**
+     * 取消訂單並更新商品庫存
+     *
+     * @param  \App\Models\Order  $order
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function cancel(Order $order)
+    {
+        // 確保訂單的狀態為未取消
+        if ($order->status !== 'canceled') {
+            // 改變訂單狀態為已取消
+            $order->status = 'canceled';
+            $order->save();
+
+            // 更新每個商品的庫存
+            foreach ($order->orderDetails as $orderDetail) {
+                $product = $orderDetail->product;
+                $product->stock += $orderDetail->quantity;  // 增加庫存
+                $product->save();
+            }
+
+            // 返回到訂單頁面
+            return redirect()->route('orders.index')->with('success', '訂單已成功取消');
+        }
+
+        // 如果訂單已經取消，返回訂單頁面
+        return redirect()->route('orders.index')->with('error', '該訂單已經被取消過了');
     }
 }

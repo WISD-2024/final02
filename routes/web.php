@@ -131,3 +131,5 @@ Route::get('orders/{order}', [OrderController::class, 'show'])->name('orders.sho
 //查看訂單
 Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
 
+//取消訂單
+Route::patch('orders/{order}/cancel', [OrderController::class, 'cancel'])->name('orders.cancel');
