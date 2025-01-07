@@ -1,4 +1,3 @@
-<!-- resources/views/seller/index.blade.php -->
 @extends('layouts.app')
 
 @section('content')
@@ -23,6 +22,7 @@
             <table class="min-w-full table-auto border-collapse text-sm">
                 <thead class="bg-gray-100">
                     <tr>
+                        <th class="py-3 px-4 text-left font-semibold text-gray-700">圖片</th>
                         <th class="py-3 px-4 text-left font-semibold text-gray-700">名稱</th>
                         <th class="py-3 px-4 text-left font-semibold text-gray-700">價格</th>
                         <th class="py-3 px-4 text-left font-semibold text-gray-700">說明</th>
@@ -32,13 +32,21 @@
                 <tbody class="divide-y divide-gray-200">
                     @foreach($products as $product)
                         <tr>
+                            <td class="py-3 px-4">
+                                <!-- 顯示圖片，若有圖片則顯示，若沒有則顯示預設圖片 -->
+                                @if($product->image)
+                                    <img src="{{ asset('storage/' . $product->image) }}" alt="商品圖片" class="w-20 h-20 object-cover rounded-md">
+                                @else
+                                    <img src="{{ asset('storage/uploads/default.jpg') }}" alt="預設商品圖片" class="w-20 h-20 object-cover rounded-md">
+                                @endif
+                            </td>
                             <td class="py-3 px-4">{{ $product->name }}</td>
                             <td class="py-3 px-4">{{ $product->price }}</td>
                             <td class="py-3 px-4">{{ $product->description }}</td>
                             <td class="py-3 px-4 space-x-2">
-                            <a href="{{ route('seller.edit', $product->id) }}" class="btn btn-warning bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-400" style="background-color: #F59E0B !important;">
-                            更改
-                        </a>
+                                <a href="{{ route('seller.edit', $product->id) }}" class="btn btn-warning bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-400" style="background-color: #F59E0B !important;">
+                                    更改
+                                </a>
 
                                 <form action="{{ route('seller.destroy', $product->id) }}" method="POST" style="display:inline;">
                                     @csrf

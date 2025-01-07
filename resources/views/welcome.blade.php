@@ -202,7 +202,9 @@
 <section class="products">
     @foreach($products as $product) <!-- 遍歷所有產品 -->
         <div class="product-card">
-            <img src="https://via.placeholder.com/300x200" alt="{{ $product->name }}">
+            <!-- 顯示商品圖片 -->
+            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}">
+
             <h3>{{ $product->name }}</h3>
             <p>${{ number_format($product->price, 2) }}</p>
             <a href="#" class="btn">Buy Now</a>
