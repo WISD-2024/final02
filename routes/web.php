@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ComplaintController;
 use App\Models\Product;
+use App\Http\Controllers\ProductController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -93,3 +94,7 @@ Route::get('/admin/complaints', [AdminController::class, 'showComplaints'])->nam
 
 //訪客&會員
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
+
+//搜尋產品
+Route::get('/products/search', [ProductController::class, 'search'])->name('products.search');
+
