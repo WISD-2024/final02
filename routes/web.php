@@ -23,31 +23,32 @@ use App\Http\Controllers\HomeController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/', function () {
-    $products = Product::all();
-    return view('welcome', compact('products'));
-});
-
-Route::get('/dashboard', function () {
-    $products = Product::all();
-    return view('welcome', compact('products'));
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
-require __DIR__.'/auth.php';
+//將  / /dashboard /order定向至主頁面
+    Route::get('/', function () {
+        $products = DB::table('products')->get();
+        return view('welcome', compact('products'));
+    })->name('welcome');
+    Route::get('/dashboard', function () {
+        $products = Product::all();
+        return view('welcome', compact('products'));
+    })->middleware(['auth', 'verified'])->name('dashboard');
+    Route::get('/order', function () {
+        $products = Product::all();
+        return view('welcome', compact('products'));
+    });
+//
+//認證
+    Route::middleware('auth')->group(function () {
+        Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+        Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    });
+    require __DIR__.'/auth.php';
+//
 
 //賣家功能
-
     Route::get('seller/dashboard', [SellerController::class, 'dashboard']);
     Route::resource('seller/products', ProductController::class);
-
-
 
     Route::get('/seller/create', [SellerController::class, 'index'])->name('seller.index');
 
@@ -67,65 +68,67 @@ require __DIR__.'/auth.php';
     Route::delete('destroy/{product}', [SellerController::class, 'destroy'])->name('seller.destroy');
 
 
-Route::get('/seller/create', function () {
-    return view('seller.create');
-});
-Route::get('/seller/edit', function () {
-    return view('seller.edit');
-});
-Route::get('/seller/index', function () {
-    return view('seller.index');
-});
+    Route::get('/seller/create', function () {
+        return view('seller.create');
+    });
+    Route::get('/seller/edit', function () {
+        return view('seller.edit');
+    });
+    Route::get('/seller/index', function () {
+        return view('seller.index');
+    });
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/seller/create', [App\Http\Controllers\SellerController::class, 'create'])->name('seller.create');
-    Route::post('/seller', [App\Http\Controllers\SellerController::class, 'store'])->name('seller.store');
-    Route::get('/seller', [App\Http\Controllers\SellerController::class, 'index'])->name('seller.index');
-});
+    Route::middleware(['auth'])->group(function () {
+        Route::get('/seller/create', [App\Http\Controllers\SellerController::class, 'create'])->name('seller.create');
+        Route::post('/seller', [App\Http\Controllers\SellerController::class, 'store'])->name('seller.store');
+        Route::get('/seller', [App\Http\Controllers\SellerController::class, 'index'])->name('seller.index');
+    });
+//
 
-Route::post('/login', [LoginController::class, 'login'])->name('login');
+//管理員功能
+    Route::post('/login', [LoginController::class, 'login'])->name('login');
 
-Route::middleware(['auth', 'is_admin'])->group(function () {
-    Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
-});
+    Route::middleware(['auth', 'is_admin'])->group(function () {
+        Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
+    });
 
-
-Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
-    Route::get('/', [ComplaintController::class, 'dashboard'])->name('admin.dashboard');
-    Route::post('/complaints', [ComplaintController::class, 'store'])->name('complaints.store');
-});
-
-
-
-
-
-
-
-//搜尋產品
-Route::get('/products/search', [ProductController::class, 'search'])->name('products.search');
-
-//商品詳細
-Route::get('products/{product}', [ProductController::class, 'show'])->name('products.show');
-
-//商品列表
-Route::get('products/by_seller/{seller}', [ProductController::class, 'by_seller'])->name('products.index');
-
-//加入購物車
-Route::post('/cart_items', [CartItemController::class, 'store'])->name('cart_items.store');
+    Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
+        Route::get('/', [ComplaintController::class, 'dashboard'])->name('admin.dashboard');
+        Route::post('/complaints', [ComplaintController::class, 'store'])->name('complaints.store');
+    });
+//
 
 
 
 
-//刪除購物車
-Route::delete('/cart_items/{cart_item}', [CartItemController::class, 'destroy'])->name('cart_items.destroy');
+//產品，購物車，訂單功能
 
-//訂單結帳
-Route::get('order/create', [OrderController::class, 'create'])->name('orders.create');
-Route::post('orders', [OrderController::class, 'store'])->name('orders.store');
-Route::get('orders/{order}', [OrderController::class, 'show'])->name('orders.show');
+    //搜尋產品
+    Route::get('/products/search', [ProductController::class, 'search'])->name('products.search');
 
-//查看訂單
-Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+    //商品詳細
+    Route::get('products/{product}', [ProductController::class, 'show'])->name('products.show');
 
-//取消訂單
-Route::patch('orders/{order}/cancel', [OrderController::class, 'cancel'])->name('orders.cancel');
+    //商品列表
+    Route::get('products/by_seller/{seller}', [ProductController::class, 'by_seller'])->name('products.index');
+
+    //加入購物車
+    Route::post('/cart_items', [CartItemController::class, 'store'])->name('cart_items.store');
+
+
+
+
+    //刪除購物車
+    Route::delete('/cart_items/{cart_item}', [CartItemController::class, 'destroy'])->name('cart_items.destroy');
+
+    //訂單結帳
+    Route::get('orders/create', [OrderController::class, 'create'])->name('orders.create');
+    Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
+    Route::get('orders/{order}', [OrderController::class, 'show'])->name('orders.show');
+
+    //查看訂單
+    Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+
+    //取消訂單
+    Route::patch('orders/{order}/cancel', [OrderController::class, 'cancel'])->name('orders.cancel');
+//

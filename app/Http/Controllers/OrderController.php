@@ -33,7 +33,7 @@ class OrderController extends Controller
         $order->payment_method = $validated['payment_method'];
         $order->shipping_address = $validated['shipping_address'];
         // 儲存訂單，並將其他需要的資料填入
-        $order->save();
+        #$order->save();
 
         // 儲存訂單詳細資料
         $cartItems = CartItem::where('user_id', auth()->id())->get();
@@ -49,8 +49,8 @@ class OrderController extends Controller
             $cartItem->delete();
         }
 
-        // 訂單提交成功，重定向到訂單詳情頁
-        return redirect()->route('orders.show', ['order' => $order->id]);
+        // 訂單提交成功，重定向到主頁
+        return redirect()->route('welcome')->with('success', '訂單已提交成功！');
     }
 
     public function show($orderId)

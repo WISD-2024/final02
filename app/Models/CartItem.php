@@ -9,9 +9,23 @@ class CartItem extends Model
 {
     use HasFactory;
 
-    // 如果資料表名稱不是 `cart_items`，需要明確指定
-    protected $table = 'cart_items';
+    // 設定可以批量賦值的欄位
+    protected $fillable = [
+        'user_id',
+        'product_id',
+        'quantity',
+        'price',
+    ];
 
-    // 定義允許批量賦值的欄位
-    protected $fillable = ['name', 'price', 'quantity'];
+    // 與 User 模型的關聯
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    // 與 Product 模型的關聯
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }
