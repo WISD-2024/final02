@@ -11,6 +11,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\AuthenticatedSessionController;
 use App\Http\Controllers\CartItemController;
+use App\Http\Controllers\OrderController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -122,3 +123,7 @@ Route::delete('/logout', [AuthenticatedSessionController::class, 'destroy'])->na
 //刪除購物車
 Route::delete('/cart_items/{cart_item}', [CartItemController::class, 'destroy'])->name('cart_items.destroy');
 
+//訂單結帳
+Route::get('order/create', [OrderController::class, 'create'])->name('orders.create');
+Route::post('orders', [OrderController::class, 'store'])->name('orders.store');
+Route::get('orders/{order}', [OrderController::class, 'show'])->name('orders.show');
