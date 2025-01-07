@@ -9,6 +9,7 @@ use App\Http\Controllers\ComplaintController;
 use App\Models\Product;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RegisteredUserController;
+use App\Http\Controllers\AuthenticatedSessionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -110,3 +111,6 @@ Route::post('/cart_items', [CartItemController::class, 'store'])->name('cart_ite
 
 //註冊&儲存資料
 Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
+
+//登入
+Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
