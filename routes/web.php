@@ -25,14 +25,18 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::get('/', function () {
-    $products = Product::all();
+    $products = DB::table('products')->get();
     return view('welcome', compact('products'));
-});
+})->name('welcome');
 
 Route::get('/dashboard', function () {
     $products = Product::all();
     return view('welcome', compact('products'));
 })->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/order', function () {
+    $products = Product::all();
+    return view('welcome', compact('products'));
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -121,7 +125,7 @@ Route::delete('/cart_items/{cart_item}', [CartItemController::class, 'destroy'])
 
 //訂單結帳
 Route::get('orders/create', [OrderController::class, 'create'])->name('orders.create');
-Route::post('orders', [OrderController::class, 'store'])->name('orders.store');
+Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
 Route::get('orders/{order}', [OrderController::class, 'show'])->name('orders.show');
 
 //查看訂單

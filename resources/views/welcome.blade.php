@@ -253,15 +253,18 @@
 </div>
 
 <section class="products">
-    @foreach($products as $product)
+    @foreach($products as $product) <!-- 遍歷所有產品 -->
         <div class="product-card">
+            <!-- 顯示商品圖片 -->
             <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}">
+
             <h3>{{ $product->name }}</h3>
             <p>${{ number_format($product->price, 2) }}</p>
-            <a href="#" class="btn">Buy Now</a>
+            
+            <!-- Buy Now 按鈕，直接指向 orders.create -->
+            <a href="{{ route('orders.create') }}" class="btn">Buy Now</a>
         </div>
     @endforeach
-</section>
 
 @auth
     <section class="feedback">

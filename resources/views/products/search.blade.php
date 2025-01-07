@@ -32,7 +32,8 @@
                         
                         <p class="text-xl font-semibold text-green-600 mb-2">${{ number_format($product->price, 2) }}</p>
 
-                        <a href="#" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400 mt-4 block text-center">立即購買</a>
+                        <!-- 立即購買按鈕，直接指向 orders.create -->
+                        <a href="{{ route('orders.create') }}" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400 mt-4 block text-center">立即購買</a>
                     </div>
                 @endforeach
             </div>
