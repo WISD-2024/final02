@@ -89,3 +89,7 @@ Route::get('/admin/dashboard', function () {
 Route::post('/complaints', [ComplaintController::class, 'store'])->name('complaints.store');
 Route::get('/admin/complaints', [AdminController::class, 'showComplaints'])->name('admin.complaints');
 
+
+
+//訪客&會員
+Route::get('/', [HomeController::class, 'index'])->name('home.index');
