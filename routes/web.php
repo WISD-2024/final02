@@ -127,3 +127,7 @@ Route::delete('/cart_items/{cart_item}', [CartItemController::class, 'destroy'])
 Route::get('order/create', [OrderController::class, 'create'])->name('orders.create');
 Route::post('orders', [OrderController::class, 'store'])->name('orders.store');
 Route::get('orders/{order}', [OrderController::class, 'show'])->name('orders.show');
+
+//查看訂單
+Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+

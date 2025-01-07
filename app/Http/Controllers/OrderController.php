@@ -57,4 +57,18 @@ class OrderController extends Controller
 
         return view('orders.show', compact('order'));
     }
+
+    /**
+     * 顯示所有訂單的頁面
+     *
+     * @return \Illuminate\View\View
+     */
+    public function index()
+    {
+        // 獲取所有訂單，這裡可以根據需要進行篩選或排序
+        $orders = Order::all();
+
+        // 返回訂單列表的視圖
+        return view('orders.index', compact('orders'));
+    }
 }
