@@ -98,3 +98,6 @@ Route::get('/', [HomeController::class, 'index'])->name('home.index');
 //搜尋產品
 Route::get('/products/search', [ProductController::class, 'search'])->name('products.search');
 
+//商品詳細
+Route::get('products/{product}', [ProductController::class, 'show'])->name('products.show');
+

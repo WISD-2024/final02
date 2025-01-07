@@ -12,4 +12,10 @@ class ProductController extends Controller
 
         return view('products.search', compact('products', 'keyword'));
     }
+
+    public function show(Product $product)
+    {
+        // 顯示商品頁面，傳遞商品資料到視圖
+        return view('products.show', compact('product'));
+    }
 }
