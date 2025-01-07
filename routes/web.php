@@ -103,3 +103,7 @@ Route::get('products/{product}', [ProductController::class, 'show'])->name('prod
 
 //商品列表
 Route::get('products/by_seller/{seller}', [ProductController::class, 'by_seller'])->name('products.index');
+
+//加入購物車
+Route::post('/cart_items', [CartItemController::class, 'store'])->name('cart_items.store');
+
