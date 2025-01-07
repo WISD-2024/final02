@@ -113,7 +113,7 @@ Route::post('/cart_items', [CartItemController::class, 'store'])->name('cart_ite
 Route::delete('/cart_items/{cart_item}', [CartItemController::class, 'destroy'])->name('cart_items.destroy');
 
 //訂單結帳
-Route::get('order/create', [OrderController::class, 'create'])->name('orders.create');
+Route::get('orders/create', [OrderController::class, 'create'])->name('orders.create');
 Route::post('orders', [OrderController::class, 'store'])->name('orders.store');
 Route::get('orders/{order}', [OrderController::class, 'show'])->name('orders.show');
 
