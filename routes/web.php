@@ -5,7 +5,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SellerController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ComplaintController;
 use App\Models\Product;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RegisteredUserController;
+use App\Http\Controllers\AuthenticatedSessionController;
+use App\Http\Controllers\CartItemController;
+use App\Http\Controllers\OrderController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -85,3 +91,45 @@ Route::middleware(['auth', 'is_admin'])->group(function () {
 Route::get('/admin/dashboard', function () {
     return view('admin.dashboard');
 });
+Route::post('/complaints', [ComplaintController::class, 'store'])->name('complaints.store');
+Route::get('/admin/complaints', [AdminController::class, 'showComplaints'])->name('admin.complaints');
+
+
+
+//訪客&會員
+Route::get('/', [HomeController::class, 'index'])->name('home.index');
+
+//搜尋產品
+Route::get('/products/search', [ProductController::class, 'search'])->name('products.search');
+
+//商品詳細
+Route::get('products/{product}', [ProductController::class, 'show'])->name('products.show');
+
+//商品列表
+Route::get('products/by_seller/{seller}', [ProductController::class, 'by_seller'])->name('products.index');
+
+//加入購物車
+Route::post('/cart_items', [CartItemController::class, 'store'])->name('cart_items.store');
+
+//註冊&儲存資料
+Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
+
+//登入
+Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
+
+//登出
+Route::delete('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+
+//刪除購物車
+Route::delete('/cart_items/{cart_item}', [CartItemController::class, 'destroy'])->name('cart_items.destroy');
+
+//訂單結帳
+Route::get('order/create', [OrderController::class, 'create'])->name('orders.create');
+Route::post('orders', [OrderController::class, 'store'])->name('orders.store');
+Route::get('orders/{order}', [OrderController::class, 'show'])->name('orders.show');
+
+//查看訂單
+Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+
+//取消訂單
+Route::patch('orders/{order}/cancel', [OrderController::class, 'cancel'])->name('orders.cancel');

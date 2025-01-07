@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('roles', function (Blueprint $table) {
+        Schema::create('complaints', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('complaint');  // 可以根據你的需求修改欄位
+            $table->text('suggestion');   // 或其他欄位
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');  // 外鍵欄位，根據需要設置
             $table->timestamps();
         });
     }
@@ -23,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('roles');
+        Schema::dropIfExists('complaints');
     }
 };
