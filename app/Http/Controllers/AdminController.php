@@ -31,6 +31,13 @@ class AdminController extends Controller
         // 邏輯來管理用戶，例如顯示所有用戶
         return view('admin.manage_users');
     }
+    public function dashboard()
+    {
+        $complaints = Complaint::all();  // 取出所有意見
+
+        return view('admin.dashboard', compact('complaints'));
+    }
+
 
     // 其他功能
     // public function otherAdminFunction() { ... }

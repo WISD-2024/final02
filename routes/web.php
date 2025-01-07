@@ -12,6 +12,7 @@ use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\AuthenticatedSessionController;
 use App\Http\Controllers\CartItemController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -92,12 +93,10 @@ Route::get('/admin/dashboard', function () {
     return view('admin.dashboard');
 });
 Route::post('/complaints', [ComplaintController::class, 'store'])->name('complaints.store');
-Route::get('/admin/complaints', [AdminController::class, 'showComplaints'])->name('admin.complaints');
+Route::get('/admin', [AdminController::class, 'dashboard'])->middleware('auth', 'admin');
 
 
 
-//訪客&會員
-Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
 //搜尋產品
 Route::get('/products/search', [ProductController::class, 'search'])->name('products.search');
@@ -111,14 +110,7 @@ Route::get('products/by_seller/{seller}', [ProductController::class, 'by_seller'
 //加入購物車
 Route::post('/cart_items', [CartItemController::class, 'store'])->name('cart_items.store');
 
-//註冊&儲存資料
-Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
 
-//登入
-Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
-
-//登出
-Route::delete('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
 //刪除購物車
 Route::delete('/cart_items/{cart_item}', [CartItemController::class, 'destroy'])->name('cart_items.destroy');
