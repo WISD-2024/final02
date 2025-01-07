@@ -9,10 +9,7 @@ class Complaint extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'user_id', // 用戶 ID
-        'complaint', // 投訴內容
-    ];
+    protected $fillable = ['message', 'user_id'];
 
     // 定義與 User 模型的關聯
     public function user()

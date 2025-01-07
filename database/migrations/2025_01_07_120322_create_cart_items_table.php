@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('complaints', function (Blueprint $table) {
+        Schema::create('cart_items', function (Blueprint $table) {
             $table->id();
-            $table->text('message');
-            $table->unsignedBigInteger('user_id')->nullable();  // 可選，根據需求可以保存用戶ID
+            $table->string('name'); // 產品名稱
+            $table->decimal('price', 8, 2); // 價格
+            $table->integer('quantity'); // 數量
             $table->timestamps();
-
-            // 外鍵約束
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
         });
     }
 
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('complaints');
+        Schema::dropIfExists('cart_items');
     }
 };

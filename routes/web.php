@@ -12,6 +12,7 @@ use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\AuthenticatedSessionController;
 use App\Http\Controllers\CartItemController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -88,11 +89,15 @@ Route::middleware(['auth', 'is_admin'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
 });
 
-Route::get('/admin/dashboard', function () {
-    return view('admin.dashboard');
+
+Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
+    Route::get('/', [ComplaintController::class, 'dashboard'])->name('admin.dashboard');
+    Route::post('/complaints', [ComplaintController::class, 'store'])->name('complaints.store');
 });
-Route::post('/complaints', [ComplaintController::class, 'store'])->name('complaints.store');
-Route::get('/admin/complaints', [AdminController::class, 'showComplaints'])->name('admin.complaints');
+
+
+
+
 
 
 
@@ -107,6 +112,8 @@ Route::get('products/by_seller/{seller}', [ProductController::class, 'by_seller'
 
 //加入購物車
 Route::post('/cart_items', [CartItemController::class, 'store'])->name('cart_items.store');
+
+
 
 
 //刪除購物車

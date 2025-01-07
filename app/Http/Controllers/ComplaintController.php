@@ -6,23 +6,27 @@ use App\Models\Complaint;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+
 class ComplaintController extends Controller
 {
-    // 在 ComplaintController 中新增 store 方法
+    public function dashboard()
+    {
+        $complaints = Complaint::with('user')->get();
+        return view('admin.dashboard', compact('complaints'));
+    }
 
     public function store(Request $request)
     {
+        // 驗證並儲存投訴資料
         $request->validate([
-            'complaint' => 'required|string|max:1000',
+            'message' => 'required|string|max:1000',
         ]);
 
-        // 創建投訴紀錄
-        Complaint::create([
-            'user_id' => Auth::id(),
-            'complaint' => $request->complaint,
-        ]);
+        $complaint = new Complaint();
+        $complaint->message = $request->message;
+        $complaint->user_id = auth()->id();
+        $complaint->save();
 
-        return redirect()->back()->with('success', '您的投訴已提交成功！');
+        return redirect()->back()->with('success', '您的意見已提交！');
     }
-
 }

@@ -143,6 +143,59 @@
             background-color: #ffd699;
         }
 
+        /* Feedback Section */
+        .feedback {
+            background-color: #fff3e0;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-top: 2rem;
+        }
+
+        .feedback h2 {
+            font-size: 2rem;
+            color: #ff8c42;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .feedback form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .feedback textarea {
+            padding: 1rem;
+            font-size: 1rem;
+            border: 1px solid #ff8c42;
+            border-radius: 8px;
+            resize: vertical;
+            min-height: 150px;
+            max-width: 100%;
+            transition: border-color 0.3s ease;
+        }
+
+        .feedback textarea:focus {
+            border-color: #ff6f3f;
+            outline: none;
+        }
+
+        .feedback button {
+            padding: 1rem;
+            background-color: #ff8c42;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .feedback button:hover {
+            background-color: #ff6f3f;
+        }
+
         /* Footer */
         footer {
             background-color: #343a40;
@@ -185,12 +238,9 @@
             <a href="{{ route('register') }}">Register</a>
         @endauth
 
-            @if(auth()->user() && auth()->user()->isAdmin())
-                <a href="{{ route('admin.dashboard') }}" class="btn btn-primary">管理員後台</a>
-            @endif
-            @auth
-                <a href="#" data-toggle="modal" data-target="#complaintModal">意見欄</a>
-            @endauth
+        @if(auth()->user() && auth()->user()->isAdmin())
+            <a href="{{ route('admin.dashboard') }}" class="btn btn-primary">顧客意見</a>
+        @endif
     </nav>
 </header>
 
@@ -203,22 +253,34 @@
 </div>
 
 <section class="products">
-    @foreach($products as $product) <!-- 遍歷所有產品 -->
+    @foreach($products as $product)
         <div class="product-card">
-            <!-- 顯示商品圖片 -->
             <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}">
-
             <h3>{{ $product->name }}</h3>
             <p>${{ number_format($product->price, 2) }}</p>
             <a href="#" class="btn">Buy Now</a>
         </div>
     @endforeach
 </section>
+
+@auth
+    <section class="feedback">
+        <form action="{{ route('complaints.store') }}" method="POST" style="margin-top: 1rem;">
+            @csrf
+            <div style="margin-bottom: 1rem;">
+                <label for="message" style="display: block; font-weight: bold;">給出您的建議：</label>
+                <textarea name="message" id="message" rows="4" style="width: 100%; max-width: 400px; padding: 0.5rem; border: 1px solid #ccc; border-radius: 5px;" placeholder="請輸入您的建議..." required></textarea>
+            </div>
+            <button type="submit" style="padding: 0.5rem 1rem; font-size: 0.9rem; width: auto; max-width: 120px; background-color: #ff8c42; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: background-color 0.3s ease; margin-top: 0.2rem;">
+                提交
+            </button>
+        </form>
+    </section>
+@endauth
+
 <footer>
-    <p>&copy; 2024 本地手工藝品交易平台. All rights reserved.</p>
+    <p>&copy; 2025 本地手工藝品交易平台. All Rights Reserved.</p>
 </footer>
 
-
 </body>
-
 </html>
