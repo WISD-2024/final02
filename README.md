@@ -1,66 +1,163 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 系統畫面
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## 訪客
 
-## About Laravel
+### 首頁
+<a href ="https://imgur.com/PBUd8Dc"><img src="https://i.imgur.com/PBUd8Dc.jpg" title="source: imgur.com" /></a>
+### 登入
+<a href ="https://imgur.com/SeAKGCE"><img src="https://i.imgur.com/SeAKGCE.jpg" title="source: imgur.com" /></a>
+### 註冊
+<a href ="https://imgur.com/WqckWBh"><img src="https://i.imgur.com/WqckWBh.jpg" title="source: imgur.com" /></a>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 會員
+### 首頁
+<a href ="https://imgur.com/RQkCgxw"><img src="https://i.imgur.com/RQkCgxw.jpg" title="source: imgur.com" /></a>
+### 商品資訊
+<a href ="https://imgur.com/SdhAbaq"><img src="https://i.imgur.com/SdhAbaq.jpg" title="source: imgur.com" /></a>
+### 搜尋商品
+<a href ="https://imgur.com/H6vXx9T"><img src="https://i.imgur.com/H6vXx9T.png" title="source: imgur.com" /></a>
+### 結帳
+<a href ="https://imgur.com/2Zo7GKq"><img src="https://i.imgur.com/2Zo7GKq.jpg" title="source: imgur.com" /></a>
+### 賣家頁面
+<a href ="https://imgur.com/moTB4fO"><img src="https://i.imgur.com/moTB4fO.jpg" title="source: imgur.com" /></a>
+### 新增商品
+<a href ="https://imgur.com/nqANeLW"><img src="https://i.imgur.com/nqANeLW.jpg" title="source: imgur.com" /></a>
+### 修改商品
+<a href ="https://imgur.com/nU3kX6A"><img src="https://i.imgur.com/nU3kX6A.png" title="source: imgur.com" /></a>
+### 刪除商品
+<a href ="https://imgur.com/1CI3Rb4"><img src="https://i.imgur.com/1CI3Rb4.png" title="source: imgur.com" /></a>
+### 提出建議
+<a href ="https://imgur.com/2VmSmSA"><img src="https://i.imgur.com/2VmSmSA.png" title="source: imgur.com" /></a>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 管理員
+### 首頁
+<a href ="https://imgur.com/HTDfYnY"><img src="https://i.imgur.com/HTDfYnY.jpg" title="source: imgur.com" /></a>
+### 意見管理
+<a href ="https://imgur.com/cb8xNSZ"><img src="https://i.imgur.com/cb8xNSZ.jpg" title="source: imgur.com" /></a>
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+# 系統名稱及作用
 
-## Learning Laravel
+本地手工藝品交易平台
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+   - 手工藝線上交易
+   
+   - 提供手工藝品銷路
+    
+   - 讓顧客、賣家更方便且快速的找到買賣途徑 
+   
+# 系統主要功能
+##  訪客
+  - 將  / /dashboard /order定向至主頁面 
+    (Route::get('/', function () {
+        $products = DB::table('products')->get();
+        return view('welcome', compact('products'));
+    })->name('welcome');)
+    Route::get('/dashboard', function () {
+        $products = Product::all();
+        return view('welcome', compact('products'));
+    })->middleware(['auth', 'verified'])->name('dashboard');
+    Route::get('/order', function () {
+        $products = Product::all();
+        return view('welcome', compact('products'));
+    }); [曾永全 3B132016](https://github.com/3B132016)
+  
+  ><訂單>
+  - 初始化顧客訂單 (Route::get('/init',[OrderController::class,'init'])->name('orders.init');) [黃河濤 3B032081](https://github.com/student3B032081)
+  - 點餐頁面 (Route::get('/orders',[OrderController::class,'index'])->name('orders.index');) [黃河濤 3B032081](https://github.com/student3B032081)
+  - 新增訂單 (Route::get('/orders/create/{order}', [OrderController::class, 'create'])->name('orders.create');) [黃河濤 3B032081](https://github.com/student3B032081)
+  - 儲存結帳資訊 (Route::post('/orders/{order}', [OrderController::class, 'store'])->name('orders.store');) [黃河濤 3B032081](https://github.com/student3B032081)
+  - 訂單詳情 (Route::get('/orders/{order}/show', [OrderController::class, 'show'])->name('orders.show');) [黃河濤 3B032081](https://github.com/student3B032081)
+  - 訂單餐點編輯 (Route::get('/orders/{order}/edit',[OrderController::class,'edit'])->name('orders.edit');) [黃河濤 3B032081](https://github.com/student3B032081)
+  - 訂單餐點更新 (Route::patch('/orders/{order}',[OrderController::class,'update'])->name('orders.update');) [黃河濤 3B032081](https://github.com/student3B032081)
+  
+  ><訂單明細>
+  - 目前顧客之訂單 (Route::get('/OrderItem',[OrderItemController::class,'index'])->name('OrderItem.index');) [黃河濤 3B032081](https://github.com/student3B032081)
+  - 新增餐點至明細 (Route::get('/OrderItem/create/{meal}', [OrderItemController::class, 'create'])->name('OrderItem.create');) [黃河濤 3B032081](https://github.com/student3B032081)
+  - 儲存訂單明細資料 (Route::post('/OrderItem/{meal}', [OrderItemController::class, 'store'])->name('OrderItem.store');) [黃河濤 3B032081](https://github.com/student3B032081)
+  - 刪除訂單明細資料 (Route::delete('/OrderItem/{orderItem}',[OrderItemController::class,'destroy'])->name('OrderItem.destroy');) [黃河濤 3B032081](https://github.com/student3B032081)
+  - 訂單明細頁面 (Route::get('/OrderItem/show', [OrderItemController::class, 'show'])->name('OrderItem.show');) [黃河濤 3B032081](https://github.com/student3B032081)
+  - 編輯訂單明細頁面 (Route::get('/OrderItem/{orderItem}/edit',[OrderItemController::class,'edit'])->name('OrderItem.edit');) [黃河濤 3B032081](https://github.com/student3B032081)
+  - 更新訂單明細資料 (Route::patch('/OrderItem/{orderItem}',[OrderItemController::class,'update'])->name('OrderItem.update');) [黃河濤 3B032081](https://github.com/student3B032081)
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+##  會員
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+  ><餐點管理>
+  - 餐點列表 (Route::get('/meals',[MealController::class,'index'])->name('meals.index');) [曾永全 3B132016](https://github.com/3B132016)
+  - 新增餐點頁面 (Route::get('/meals/create', [MealController::class, 'create'])->name('meals.create');) [曾永全 3B132016](https://github.com/3B132016)
+  - 儲存餐點資料 (Route::post('/meals', [MealController::class, 'store'])->name('meals.store');) [曾永全 3B132016](https://github.com/3B132016)
+  - 刪除餐點資料 (Route::delete('/meals/{meal}',[MealController::class,'destroy'])->name('meals.destroy');) [曾永全 3B132016](https://github.com/3B132016)
+  - 餐點詳情頁面 (Route::get('/meals/{meal}/show', [MealController::class, 'show'])->name('meals.show');) [曾永全 3B132016](https://github.com/3B132016)
+  - 編輯餐點頁面 (Route::get('/meals/{meal}/edit',[MealController::class,'edit'])->name('meals.edit');) [曾永全 3B132016](https://github.com/3B132016)
+  - 更新餐點資料 (Route::patch('/meals/{meal}',[MealController::class,'update'])->name('meals.update');) [曾永全 3B132016](https://github.com/3B132016)
+  
+ ><類別管理>
+  - 類別列表 (Route::get('/categories',[CategoryController::class,'index'])->name('categories.index');) [黃鐙霆 3B132047](https://github.com/3B132047)
+  - 新增類別頁面 (Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');) [黃鐙霆 3B132047](https://github.com/3B132047)
+  - 儲存類別資料 (Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');) [黃鐙霆 3B132047](https://github.com/3B132047)
+  - 編輯類別頁面 (Route::get('/categories/{category}/edit',[CategoryController::class,'edit'])->name('categories.edit');) [黃鐙霆 3B132047](https://github.com/3B132047)
+  - 更新類別資料 (Route::patch('/categories/{category}',[CategoryController::class,'update'])->name('categories.update');) [黃鐙霆 3B132047](https://github.com/3B132047)
+  - 餐點詳情頁面 (Route::get('/categories/{category}/show', [CategoryController::class, 'show'])->name('categories.show');) [黃鐙霆 3B132047](https://github.com/3B132047)
+  - 刪除餐點資料 (Route::delete('/categories/{category}',[CategoryController::class,'destroy'])->name('categories.destroy');) [黃鐙霆 3B132047](https://github.com/3B132047)
 
-## Laravel Sponsors
+##  平台人員
+  - 訂單列表  Route::get('/orders',[StaffController::class,'index'])->name('orders.index'); [黃鐙霆 3B132047](https://github.com/3B132047)
+  - 訂單詳細 Route::get('/orders/{order}/show',[StaffController::class,'show'])->name('orders.show'); [黃鐙霆 3B132047](https://github.com/3B132047)
+  - 餐點完成按鈕 Route::patch('/orderItems/{orderItem}',[StaffController::class,'itemstatus'])->name('itemstatus.update'); [黃鐙霆 3B132047](https://github.com/3B132047)
+  - 歷史訂單列表 Route::get('/orders/finish',[StaffController::class,'finish'])->name('orders.finish'); [黃鐙霆 3B132047](https://github.com/3B132047)
+  - 訂單完成按鈕 Route::patch('/orders/{order}',[StaffController::class,'orderstatus'])->name('orderstatus.update'); [黃鐙霆 3B132047](https://github.com/3B132047)
+  - 刪除訂單 Route::delete('/orders/{order}',[StaffController::class,'destroy'])->name('orders.destroy'); [黃鐙霆 3B132047](https://github.com/3B132047)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+# ERD
+<a href ="https://imgur.com/HlGWvLz"><img src="https://i.imgur.com/HlGWvLz.jpg" title="source: imgur.com" /></a>
+# 關聯式綱要圖 
+<a href ="https://imgur.com/a/srt0xLc"><img src="https://i.imgur.com/BmNSINI.jpg" title="source: imgur.com" /></a>
+# 實際資料表欄位設計 
+  - 使用者(users)資料表
+  <a href ="https://imgur.com/0xGR83e"><img src="https://i.imgur.com/0xGR83e.jpg" title="source: imgur.com" /></a>
+  - 類別(categories)資料表
+  <a href ="https://imgur.com/2tWlyH3"><img src="https://i.imgur.com/2tWlyH3.jpg" title="source: imgur.com" /></a>
+  - 餐點(meals)資料表
+  <a href ="https://imgur.com/JpKYLii"><img src="https://i.imgur.com/JpKYLii.jpg" title="source: imgur.com" /></a>
+  - 訂單(orders)資料表
+  <a href ="https://imgur.com/OynV6o1"><img src="https://i.imgur.com/OynV6o1.jpg" title="source: imgur.com" /></a>
+  - 訂單明細(order_items)資料表
+  <a href ="https://imgur.com/J0QVPGN"><img src="https://i.imgur.com/J0QVPGN.jpg" title="source: imgur.com" /></a>
+  
+# 初始專案與DB負責與readme撰寫的同學
+- 初始專案 [許睿舜 3B132076](https://github.com/3B132076)
+- DB [陳炫樺 3B134037](https://github.com/3B134037)
+- readme撰寫[許睿舜 3B132076](https://github.com/3B132076) [陳令祥 3B132074](https://github.com/3B132074)
 
-### Premium Partners
+# 額外使用的套件或樣板  
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+- startbootstrap
+    ```
+    介面清楚明瞭，方便操作。
+    ```
+    
 
-## Contributing
+# 系統測試資料存放位置  
+- final02底下的sql資料夾
+ 
+# 系統使用者測試帳號  
+    
+    帳號:seller@example.com(會員)
+    密碼:password123
+    帳號:Admin@example.com(管理人員)
+    密碼:password123
+    
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+# 系統開發人員與工作分配  
 
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- [陳令祥 3B132074](https://github.com/3B132016)
+    ```
+    訪客、買家介面管理
+    ```
+- [許睿舜 3B132076](https://github.com/3B132047)
+    ```
+    平台人員管理、登入系統、主頁介面
+    ```   
+- [陳炫樺 3B032081](https://github.com/student3B032081) 
+    ```
+    賣家介面管理、買家介面管理、商品介面管理
+    ```

@@ -46,7 +46,7 @@
         /* Banner */
         .banner {
             background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-            url('https://via.placeholder.com/1500x500') no-repeat center center/cover;
+            url('{{ asset('images/back.jpg') }}') no-repeat center center/cover;
             height: 500px;
             display: flex;
             justify-content: center;
@@ -55,6 +55,7 @@
             text-align: center;
             padding: 0 1rem;
         }
+
 
         .banner h1 {
             font-size: 3.5rem;
@@ -227,15 +228,15 @@
     <div class="logo">手工藝品交易</div>
     <nav>
         @auth
-            <a href="#">Welcome, {{ auth()->user()->name }}</a>
+            <a href="#">歡迎！ {{ auth()->user()->name }}</a>
             <a href="{{ route('seller.index') }}">賣家頁面</a>
-            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">登出</a>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
             </form>
         @else
-            <a href="{{ route('login') }}">Login</a>
-            <a href="{{ route('register') }}">Register</a>
+            <a href="{{ route('login') }}">登入</a>
+            <a href="{{ route('register') }}">註冊</a>
         @endauth
 
         @if(auth()->user() && auth()->user()->isAdmin())
@@ -246,8 +247,8 @@
 
 <div class="banner">
     <div>
-        <h1>Explore Handmade Wonders</h1>
-        <p>Discover unique, handcrafted items made with love</p>
+        <h1>探索手工精品</h1>
+        <p>匠人手做血汗手工藝</p>
         <a href="{{ route('products.search') }}" class="cta-btn">立即購買</a>
     </div>
 </div>
