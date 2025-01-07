@@ -114,3 +114,7 @@ Route::get('/register', [RegisteredUserController::class, 'create'])->name('regi
 
 //登入
 Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
+
+//登出
+Route::delete('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+
