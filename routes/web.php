@@ -101,3 +101,5 @@ Route::get('/products/search', [ProductController::class, 'search'])->name('prod
 //商品詳細
 Route::get('products/{product}', [ProductController::class, 'show'])->name('products.show');
 
+//商品列表
+Route::get('products/by_seller/{seller}', [ProductController::class, 'by_seller'])->name('products.index');
