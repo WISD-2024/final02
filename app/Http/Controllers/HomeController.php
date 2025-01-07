@@ -6,10 +6,10 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    /**
+    /*
      * 顯示首頁
      *
-     * @return \Illuminate\View\View
+     * @return \Illuminate\View\Vieww
      */
     public function index()
     {
