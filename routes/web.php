@@ -8,6 +8,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ComplaintController;
 use App\Models\Product;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RegisteredUserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -107,3 +108,5 @@ Route::get('products/by_seller/{seller}', [ProductController::class, 'by_seller'
 //加入購物車
 Route::post('/cart_items', [CartItemController::class, 'store'])->name('cart_items.store');
 
+//註冊&儲存資料
+Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
