@@ -99,6 +99,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
 
 
 
+
+
 //搜尋產品
 Route::get('/products/search', [ProductController::class, 'search'])->name('products.search');
 
@@ -110,6 +112,7 @@ Route::get('products/by_seller/{seller}', [ProductController::class, 'by_seller'
 
 //加入購物車
 Route::post('/cart_items', [CartItemController::class, 'store'])->name('cart_items.store');
+
 
 
 

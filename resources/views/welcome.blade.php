@@ -248,7 +248,7 @@
     <div>
         <h1>Explore Handmade Wonders</h1>
         <p>Discover unique, handcrafted items made with love</p>
-        <a href="#" class="cta-btn">Shop Now</a>
+        <a href="{{ route('products.search') }}" class="cta-btn">立即購買</a>
     </div>
 </div>
 

@@ -9,9 +9,12 @@ class ProductController extends Controller
 {
     public function search(Request $request)
     {
-        $keyword = $request->input('keyword'); // 獲取輸入的關鍵字
-        $products = Product::where('name', 'like', '%' . $keyword . '%')->get(); // 模糊查詢產品名稱
-
+        $keyword = $request->input('search');
+    
+        // 根據名稱搜尋商品
+        $products = Product::where('name', 'like', '%' . $keyword . '%')->get();
+    
+        // 返回搜尋結果至視圖
         return view('products.search', compact('products', 'keyword'));
     }
 
