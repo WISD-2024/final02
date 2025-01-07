@@ -4,21 +4,20 @@
     </h2>
 </x-slot>
 
-<div class="py-12 bg-gray-800">  <!-- 修改背景顏色為深灰色 -->
+<div class="py-12 bg-gray-900 dark:bg-gray-900">  <!-- 修改背景顏色為深灰色 -->
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="bg-gray-900 dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">  <!-- 深色背景 -->
+        <div class="bg-gray-900 dark:bg-gray-900 overflow-hidden shadow-sm sm:rounded-lg relative">  <!-- 添加 relative 使 z-index 生效 -->
             <div class="p-6 text-gray-100">  <!-- 文字顏色設為淺色 -->
                 <div class="flex justify-between items-center mb-6">
                     <h3 class="font-semibold text-lg text-white">用戶意見</h3> <!-- 白色文字 -->
-                    <a href="{{ route('admin.dashboard') }}" class="bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition duration-300 shadow-md">
-                        回到主頁
+
                     </a>
                 </div>
 
                 @if($complaints->isEmpty())
                     <p class="text-gray-400">目前沒有任何用戶意見。</p> <!-- 使用灰色的文字 -->
                 @else
-                    <div class="overflow-x-auto rounded-lg shadow-lg">
+                    <div class="overflow-x-auto rounded-lg shadow-lg z-10">  <!-- 添加 z-index 使表格層級較高 -->
                         <table class="min-w-full bg-gray-800 text-white border border-gray-300 rounded-lg shadow-sm">
                             <thead class="bg-indigo-600 dark:bg-indigo-800">
                             <tr>
