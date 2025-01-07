@@ -10,6 +10,7 @@ use App\Models\Product;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\AuthenticatedSessionController;
+use App\Http\Controllers\CartItemController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -117,4 +118,7 @@ Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('l
 
 //登出
 Route::delete('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+
+//刪除購物車
+Route::delete('/cart_items/{cart_item}', [CartItemController::class, 'destroy'])->name('cart_items.destroy');
 
