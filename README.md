@@ -128,20 +128,12 @@
 
 
 # ERD
-<a href ="https://imgur.com/HlGWvLz"><img src="https://i.imgur.com/HlGWvLz.jpg" title="source: imgur.com" /></a>
+<a href ="https://imgur.com/a/Dj4NuV7"><img src="https://imgur.com/a/Dj4NuV7.jpg" title="source: imgur.com" /></a>
 # 關聯式綱要圖 
-<a href ="https://imgur.com/a/srt0xLc"><img src="https://i.imgur.com/BmNSINI.jpg" title="source: imgur.com" /></a>
+<a href ="https://imgur.com/a/sld5n7n"><img src="https://imgur.com/a/sld5n7n.jpg" title="source: imgur.com" /></a>
 # 實際資料表欄位設計 
-  - 使用者(users)資料表
-  <a href ="https://imgur.com/0xGR83e"><img src="https://i.imgur.com/0xGR83e.jpg" title="source: imgur.com" /></a>
-  - 類別(categories)資料表
-  <a href ="https://imgur.com/2tWlyH3"><img src="https://i.imgur.com/2tWlyH3.jpg" title="source: imgur.com" /></a>
-  - 餐點(meals)資料表
-  <a href ="https://imgur.com/JpKYLii"><img src="https://i.imgur.com/JpKYLii.jpg" title="source: imgur.com" /></a>
-  - 訂單(orders)資料表
-  <a href ="https://imgur.com/OynV6o1"><img src="https://i.imgur.com/OynV6o1.jpg" title="source: imgur.com" /></a>
-  - 訂單明細(order_items)資料表
-  <a href ="https://imgur.com/J0QVPGN"><img src="https://i.imgur.com/J0QVPGN.jpg" title="source: imgur.com" /></a>
+  - 資料表
+  <a href ="https://imgur.com/a/2Hgwzju"><img src="https://imgur.com/a/2Hgwzju.jpg" title="source: imgur.com" /></a>
   
 # 初始專案與DB負責與readme撰寫的同學
 - 初始專案 [許睿舜 3B132076](https://github.com/3B132076)
