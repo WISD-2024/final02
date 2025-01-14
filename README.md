@@ -45,67 +45,87 @@
     
    - 讓顧客、賣家更方便且快速的找到買賣途徑 
    
-# 系統主要功能
-##  訪客
-  - 將  / /dashboard /order定向至主頁面 
-    (Route::get('/', function () {
-        $products = DB::table('products')->get();
-        return view('welcome', compact('products'));
-    })->name('welcome');)
-    Route::get('/dashboard', function () {
-        $products = Product::all();
-        return view('welcome', compact('products'));
-    })->middleware(['auth', 'verified'])->name('dashboard');
-    Route::get('/order', function () {
-        $products = Product::all();
-        return view('welcome', compact('products'));
-    }); [曾永全 3B132016](https://github.com/3B132016)
-  
-  ><訂單>
-  - 初始化顧客訂單 (Route::get('/init',[OrderController::class,'init'])->name('orders.init');) [黃河濤 3B032081](https://github.com/student3B032081)
-  - 點餐頁面 (Route::get('/orders',[OrderController::class,'index'])->name('orders.index');) [黃河濤 3B032081](https://github.com/student3B032081)
-  - 新增訂單 (Route::get('/orders/create/{order}', [OrderController::class, 'create'])->name('orders.create');) [黃河濤 3B032081](https://github.com/student3B032081)
-  - 儲存結帳資訊 (Route::post('/orders/{order}', [OrderController::class, 'store'])->name('orders.store');) [黃河濤 3B032081](https://github.com/student3B032081)
-  - 訂單詳情 (Route::get('/orders/{order}/show', [OrderController::class, 'show'])->name('orders.show');) [黃河濤 3B032081](https://github.com/student3B032081)
-  - 訂單餐點編輯 (Route::get('/orders/{order}/edit',[OrderController::class,'edit'])->name('orders.edit');) [黃河濤 3B032081](https://github.com/student3B032081)
-  - 訂單餐點更新 (Route::patch('/orders/{order}',[OrderController::class,'update'])->name('orders.update');) [黃河濤 3B032081](https://github.com/student3B032081)
-  
-  ><訂單明細>
-  - 目前顧客之訂單 (Route::get('/OrderItem',[OrderItemController::class,'index'])->name('OrderItem.index');) [黃河濤 3B032081](https://github.com/student3B032081)
-  - 新增餐點至明細 (Route::get('/OrderItem/create/{meal}', [OrderItemController::class, 'create'])->name('OrderItem.create');) [黃河濤 3B032081](https://github.com/student3B032081)
-  - 儲存訂單明細資料 (Route::post('/OrderItem/{meal}', [OrderItemController::class, 'store'])->name('OrderItem.store');) [黃河濤 3B032081](https://github.com/student3B032081)
-  - 刪除訂單明細資料 (Route::delete('/OrderItem/{orderItem}',[OrderItemController::class,'destroy'])->name('OrderItem.destroy');) [黃河濤 3B032081](https://github.com/student3B032081)
-  - 訂單明細頁面 (Route::get('/OrderItem/show', [OrderItemController::class, 'show'])->name('OrderItem.show');) [黃河濤 3B032081](https://github.com/student3B032081)
-  - 編輯訂單明細頁面 (Route::get('/OrderItem/{orderItem}/edit',[OrderItemController::class,'edit'])->name('OrderItem.edit');) [黃河濤 3B032081](https://github.com/student3B032081)
-  - 更新訂單明細資料 (Route::patch('/OrderItem/{orderItem}',[OrderItemController::class,'update'])->name('OrderItem.update');) [黃河濤 3B032081](https://github.com/student3B032081)
+## 路由功能說明
 
-##  會員
+### 首頁與基本路由
 
-  ><餐點管理>
-  - 餐點列表 (Route::get('/meals',[MealController::class,'index'])->name('meals.index');) [曾永全 3B132016](https://github.com/3B132016)
-  - 新增餐點頁面 (Route::get('/meals/create', [MealController::class, 'create'])->name('meals.create');) [曾永全 3B132016](https://github.com/3B132016)
-  - 儲存餐點資料 (Route::post('/meals', [MealController::class, 'store'])->name('meals.store');) [曾永全 3B132016](https://github.com/3B132016)
-  - 刪除餐點資料 (Route::delete('/meals/{meal}',[MealController::class,'destroy'])->name('meals.destroy');) [曾永全 3B132016](https://github.com/3B132016)
-  - 餐點詳情頁面 (Route::get('/meals/{meal}/show', [MealController::class, 'show'])->name('meals.show');) [曾永全 3B132016](https://github.com/3B132016)
-  - 編輯餐點頁面 (Route::get('/meals/{meal}/edit',[MealController::class,'edit'])->name('meals.edit');) [曾永全 3B132016](https://github.com/3B132016)
-  - 更新餐點資料 (Route::patch('/meals/{meal}',[MealController::class,'update'])->name('meals.update');) [曾永全 3B132016](https://github.com/3B132016)
-  
- ><類別管理>
-  - 類別列表 (Route::get('/categories',[CategoryController::class,'index'])->name('categories.index');) [黃鐙霆 3B132047](https://github.com/3B132047)
-  - 新增類別頁面 (Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');) [黃鐙霆 3B132047](https://github.com/3B132047)
-  - 儲存類別資料 (Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');) [黃鐙霆 3B132047](https://github.com/3B132047)
-  - 編輯類別頁面 (Route::get('/categories/{category}/edit',[CategoryController::class,'edit'])->name('categories.edit');) [黃鐙霆 3B132047](https://github.com/3B132047)
-  - 更新類別資料 (Route::patch('/categories/{category}',[CategoryController::class,'update'])->name('categories.update');) [黃鐙霆 3B132047](https://github.com/3B132047)
-  - 餐點詳情頁面 (Route::get('/categories/{category}/show', [CategoryController::class, 'show'])->name('categories.show');) [黃鐙霆 3B132047](https://github.com/3B132047)
-  - 刪除餐點資料 (Route::delete('/categories/{category}',[CategoryController::class,'destroy'])->name('categories.destroy');) [黃鐙霆 3B132047](https://github.com/3B132047)
+- **主頁面**  
+  `Route::get('/', function () { $products = DB::table('products')->get(); return view('welcome', compact('products')); })->name('welcome');` [許睿舜 3B132076](https://github.com/3B132076)
+- **儀表板**  
+  `Route::get('/dashboard', function () { $products = Product::all(); return view('welcome', compact('products')); })->middleware(['auth', 'verified'])->name('dashboard');` [許睿舜 3B132076](https://github.com/3B132076)
+- **訂單頁面**  
+  `Route::get('/order', function () { $products = Product::all(); return view('welcome', compact('products')); });` [陳炫樺 3B134037](https://github.com/3B134037)
 
-##  平台人員
-  - 訂單列表  Route::get('/orders',[StaffController::class,'index'])->name('orders.index'); [黃鐙霆 3B132047](https://github.com/3B132047)
-  - 訂單詳細 Route::get('/orders/{order}/show',[StaffController::class,'show'])->name('orders.show'); [黃鐙霆 3B132047](https://github.com/3B132047)
-  - 餐點完成按鈕 Route::patch('/orderItems/{orderItem}',[StaffController::class,'itemstatus'])->name('itemstatus.update'); [黃鐙霆 3B132047](https://github.com/3B132047)
-  - 歷史訂單列表 Route::get('/orders/finish',[StaffController::class,'finish'])->name('orders.finish'); [黃鐙霆 3B132047](https://github.com/3B132047)
-  - 訂單完成按鈕 Route::patch('/orders/{order}',[StaffController::class,'orderstatus'])->name('orderstatus.update'); [黃鐙霆 3B132047](https://github.com/3B132047)
-  - 刪除訂單 Route::delete('/orders/{order}',[StaffController::class,'destroy'])->name('orders.destroy'); [黃鐙霆 3B132047](https://github.com/3B132047)
+---
+
+### 認證功能
+
+- **編輯用戶資料**  
+  `Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');` [許睿舜 3B132076](https://github.com/3B132076)
+- **更新用戶資料**  
+  `Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');` [許睿舜 3B132076](https://github.com/3B132076)
+- **刪除用戶帳號**  
+  `Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');` [許睿舜 3B132076](https://github.com/3B132076)
+- **包含預設的認證路由**  
+  `require DIR.'/auth.php';` [許睿舜 3B132076](https://github.com/3B132076)
+
+---
+
+### 賣家功能
+
+- **賣家儀表板**  
+  `Route::get('seller/dashboard', [SellerController::class, 'dashboard']);` [陳炫樺 3B134037](https://github.com/3B134037)
+- **管理商品資源路由**  
+  `Route::resource('seller/products', ProductController::class);` [陳炫樺 3B134037](https://github.com/3B134037)
+- **賣家頁面**  
+  `Route::get('/seller/create', [SellerController::class, 'index'])->name('seller.index');` [陳炫樺 3B134037](https://github.com/3B134037)
+- **新增商品**  
+  `Route::get('create', [SellerController::class, 'create'])->name('seller.create');` [陳炫樺 3B134037](https://github.com/3B134037)
+- **儲存商品**  
+  `Route::post('store', [SellerController::class, 'store'])->name('seller.store');` [陳炫樺 3B134037](https://github.com/3B134037)
+- **編輯商品**  
+  `Route::get('edit/{product}', [SellerController::class, 'edit'])->name('seller.edit');` [陳炫樺 3B134037](https://github.com/3B134037)
+- **更新商品**  
+  `Route::put('update/{product}', [SellerController::class, 'update'])->name('seller.update');` [陳炫樺 3B134037](https://github.com/3B134037)
+- **刪除商品**  
+  `Route::delete('destroy/{product}', [SellerController::class, 'destroy'])->name('seller.destroy');` [陳炫樺 3B134037](https://github.com/3B134037)
+
+---
+
+### 管理員功能
+
+- **登入**  
+  `Route::post('/login', [LoginController::class, 'login'])->name('login');` [許睿舜 3B132076](https://github.com/3B132076)
+- **管理員儀表板**  
+  `Route::middleware(['auth', 'is_admin'])->group(function () { Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard'); });` [許睿舜 3B132076](https://github.com/3B132076)
+- **投訴管理**  
+  `Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () { Route::get('/', [ComplaintController::class, 'dashboard'])->name('admin.dashboard'); Route::post('/complaints', [ComplaintController::class, 'store'])->name('complaints.store'); });` [許睿舜 3B132076](https://github.com/3B132076)
+
+---
+
+### 產品、購物車與訂單功能
+
+- **搜尋產品**  
+  `Route::get('/products/search', [ProductController::class, 'search'])->name('products.search');` [陳炫樺 3B134037](https://github.com/3B134037)
+- **商品詳情**  
+  `Route::get('products/{product}', [ProductController::class, 'show'])->name('products.show');` [陳炫樺 3B134037](https://github.com/3B134037)
+- **商品列表**  
+  `Route::get('products/by_seller/{seller}', [ProductController::class, 'by_seller'])->name('products.index');` [陳炫樺 3B134037](https://github.com/3B134037)
+- **加入購物車**  
+  `Route::post('/cart_items', [CartItemController::class, 'store'])->name('cart_items.store');` [陳令祥 3B132074](https://github.com/3B132074)
+- **刪除購物車**  
+  `Route::delete('/cart_items/{cart_item}', [CartItemController::class, 'destroy'])->name('cart_items.destroy');` [陳令祥 3B132074](https://github.com/3B132074)
+- **新增訂單**  
+  `Route::get('orders/create', [OrderController::class, 'create'])->name('orders.create');` [陳炫樺 3B134037](https://github.com/3B134037)
+- **儲存訂單**  
+  `Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');` [陳炫樺 3B134037](https://github.com/3B134037)
+- **查看訂單詳情**  
+  `Route::get('orders/{order}', [OrderController::class, 'show'])->name('orders.show');` [陳令祥 3B132074](https://github.com/3B132074)
+- **查看所有訂單**  
+  `Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');` [陳令祥 3B132074](https://github.com/3B132074)
+- **取消訂單**  
+  `Route::patch('orders/{order}/cancel', [OrderController::class, 'cancel'])->name('orders.cancel');` [陳令祥 3B132074](https://github.com/3B132074)
+
 
 # ERD
 <a href ="https://imgur.com/HlGWvLz"><img src="https://i.imgur.com/HlGWvLz.jpg" title="source: imgur.com" /></a>
@@ -125,7 +145,7 @@
   
 # 初始專案與DB負責與readme撰寫的同學
 - 初始專案 [許睿舜 3B132076](https://github.com/3B132076)
-- DB [陳炫樺 3B134037](https://github.com/3B134037)
+- DB [陳炫樺 3B134037](https://github.com/3B134037) [許睿舜 3B132076](https://github.com/3B132076)
 - readme撰寫[許睿舜 3B132076](https://github.com/3B132076) [陳令祥 3B132074](https://github.com/3B132074)
 
 # 額外使用的套件或樣板  
