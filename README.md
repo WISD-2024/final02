@@ -128,12 +128,12 @@
 
 
 # ERD
-<a href ="https://imgur.com/a/Dj4NuV7"><img src="https://imgur.com/a/Dj4NuV7.jpg" title="source: imgur.com" /></a>
+<a href ="https://imgur.com/5JC01Jo"><img src="https://i.imgur.com/5JC01Jo.jpg" title="source: imgur.com" /></a>
 # 關聯式綱要圖 
-<a href ="https://imgur.com/a/sld5n7n"><img src="https://imgur.com/a/sld5n7n.jpg" title="source: imgur.com" /></a>
+<a href ="https://imgur.com/6NAIhYa"><img src="https://i.imgur.com/6NAIhYa.jpg" title="source: imgur.com" /></a>
 # 實際資料表欄位設計 
   - 資料表
-  <a href ="https://imgur.com/a/2Hgwzju"><img src="https://imgur.com/a/2Hgwzju.jpg" title="source: imgur.com" /></a>
+  <a href ="https://imgur.com/pPOa2AE"><img src="https://imgur.com/pPOa2AE.jpg" title="source: imgur.com" /></a>
   
 # 初始專案與DB負責與readme撰寫的同學
 - 初始專案 [許睿舜 3B132076](https://github.com/3B132076)
