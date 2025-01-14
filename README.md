@@ -108,12 +108,12 @@
   - 刪除訂單 Route::delete('/orders/{order}',[StaffController::class,'destroy'])->name('orders.destroy'); [黃鐙霆 3B132047](https://github.com/3B132047)
 
 # ERD
-<a href ="https://imgur.com/HlGWvLz"><img src="https://i.imgur.com/HlGWvLz.jpg" title="source: imgur.com" /></a>
+<a href ="https://imgur.com/a/Dj4NuV7"><img src="https://imgur.com/a/Dj4NuV7.jpg" title="source: imgur.com" /></a>
 # 關聯式綱要圖 
-<a href ="https://imgur.com/a/srt0xLc"><img src="https://i.imgur.com/BmNSINI.jpg" title="source: imgur.com" /></a>
+<a href ="https://imgur.com/a/sld5n7n"><img src="https://imgur.com/a/sld5n7n.jpg" title="source: imgur.com" /></a>
 # 實際資料表欄位設計 
   - 資料表
-  <a href ="https://imgur.com/a/sld5n7n"><img src="https://imgur.com/a/sld5n7n.jpg" title="source: imgur.com" /></a>
+  <a href ="https://imgur.com/a/2Hgwzju"><img src="https://imgur.com/a/2Hgwzju.jpg" title="source: imgur.com" /></a>
   
 # 初始專案與DB負責與readme撰寫的同學
 - 初始專案 [許睿舜 3B132076](https://github.com/3B132076)
