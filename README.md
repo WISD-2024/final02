@@ -136,15 +136,20 @@
   <a href ="https://imgur.com/pPOa2AE"><img src="https://imgur.com/pPOa2AE.jpg" title="source: imgur.com" /></a>
   
 # 初始專案與DB負責與readme撰寫的同學
+- 期中系統規劃 [許睿舜 3B132076](https://github.com/3B132076) [陳令祥 3B132074](https://github.com/3B132074)
 - 初始專案 [許睿舜 3B132076](https://github.com/3B132076)
 - DB [陳炫樺 3B134037](https://github.com/3B134037) [許睿舜 3B132076](https://github.com/3B132076)
 - readme撰寫[許睿舜 3B132076](https://github.com/3B132076) [陳令祥 3B132074](https://github.com/3B132074)
 
 # 額外使用的套件或樣板  
 
-- startbootstrap
+- spatie/laravel-permission
     ```
-    介面清楚明瞭，方便操作。
+    管理角色與權限的套件。
+    ```
+- spatie/laravel-ignition
+    ```
+    增強錯誤頁面的顯示與調試功能。
     ```
     
 
