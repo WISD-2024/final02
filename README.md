@@ -128,7 +128,7 @@
 
 
 # ERD
-<a href ="https://imgur.com/5JC01Jo"><img src="https://i.imgur.com/5JC01Jo.jpg" title="source: imgur.com" />hj錯誤，請勿參考！！</a>
+<a href ="https://imgur.com/5JC01Jo"><img src="https://i.imgur.com/5JC01Jo.jpg" title="source: imgur.com" />ERD錯誤，請勿參考！！</a>
 # 關聯式綱要圖 
 <a href ="https://imgur.com/6NAIhYa"><img src="https://i.imgur.com/6NAIhYa.jpg" title="source: imgur.com" /></a>
 # 實際資料表欄位設計 
